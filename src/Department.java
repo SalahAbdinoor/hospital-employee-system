@@ -13,10 +13,6 @@ public class Department {
     private int numberOfEmployees;
     private String location;
 
-
-
-
-
     public Department(){
 
     }

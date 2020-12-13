@@ -10,7 +10,6 @@ public class Login extends JFrame implements ActionListener {
 
     JPanel loginPanel = new JPanel();
 
-
     DAO dao = new DAO();
 
     JLabel welcomeLabel = new JLabel("Welcome to Employee Register System!");
@@ -81,22 +80,38 @@ public class Login extends JFrame implements ActionListener {
         else if (userNameText.getText().equals("surgery") && passwordField.getText().equals("surgery") &&
                 loginComboBox.getSelectedItem().toString().equals("Head Of Department")){
             dispose();
-            new ManageEmployees(dao.surgeryList, "Lists/SurgeryEmployees","Surgery",testAuthority);
+            try {
+                new ManageEmployees(dao.surgeryList, "Lists/SurgeryEmployees","Surgery",testAuthority);
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
         }
         else if (userNameText.getText().equals("anaesthetics") && passwordField.getText().equals("anaesthetics") &&
                 loginComboBox.getSelectedItem().toString().equals("Head Of Department")){
             dispose();
-            new ManageEmployees(dao.anaestheticsList, "Lists/AnaestheticsEmployees", "Anaesthetics",testAuthority);
+            try {
+                new ManageEmployees(dao.anaestheticsList, "Lists/AnaestheticsEmployees", "Anaesthetics",testAuthority);
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
         }
         else if (userNameText.getText().equals("cardiology") && passwordField.getText().equals("cardiology") &&
                 loginComboBox.getSelectedItem().toString().equals("Head Of Department")){
             dispose();
-            new ManageEmployees(dao.cardiologyList, "Lists/CardiologyEmployees", "Cardiology",testAuthority);
+            try {
+                new ManageEmployees(dao.cardiologyList, "Lists/CardiologyEmployees", "Cardiology",testAuthority);
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
         }
         else if (userNameText.getText().equals("criticalcare") && passwordField.getText().equals("criticalcare") &&
                 loginComboBox.getSelectedItem().toString().equals("Head Of Department")){
             dispose();
-            new ManageEmployees(dao.criticalCareList, "Lists/CriticalCareEmployees", "Critical care",testAuthority);
+            try {
+                new ManageEmployees(dao.criticalCareList, "Lists/CriticalCareEmployees", "Critical care",testAuthority);
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
         }
         else
             JOptionPane.showMessageDialog(this, "Felaktlig login information");

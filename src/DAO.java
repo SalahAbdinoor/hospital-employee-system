@@ -1,7 +1,5 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -28,10 +26,15 @@ public class DAO {
     private String specialization;
     private String userID;
 
-    private String cardiologyFile = "Lists/CardiologyEmployees";
-    private String surgeryFile = "Lists/SurgeryEmployees";
-    private String criticalCareFile = "Lists/CriticalCareEmployees";
-    private String anaestheticsFile = "Lists/AnaestheticsEmployees";
+    public static final String cardiologyFile = "Lists\\CardiologyEmployees";
+    public static final String surgeryFile = "Lists\\SurgeryEmployees";
+    public static final String criticalCareFile = "Lists\\CriticalCareEmployees";
+    public static final String anaestheticsFile = "Lists\\AnaestheticsEmployees";
+
+    public static final String cardiology = "Cardiology";
+    public static final String anaesthetics = "Anaesthetics";
+    public static final String surgery = "Surgery";
+    public static final String criticalCare = "Critical care";
 
 
     public List<Employee>  surgeryList = new ArrayList<>();
@@ -52,22 +55,22 @@ public class DAO {
     }
 
     private void createAnaestheticsList(String anaestheticsFile, List<Employee> anaestheticsList) throws FileNotFoundException {
-        ReadFromList(anaestheticsFile, anaestheticsList);
+        updateEmployeeList(anaestheticsFile, anaestheticsList);
     }
 
     private void createCardiologyList(String cardiologyFile, List<Employee> cardiologyList) throws FileNotFoundException {
-        ReadFromList(cardiologyFile, cardiologyList);
+        updateEmployeeList(cardiologyFile, cardiologyList);
     }
 
     private void createCriticalCareList(String criticalCareFile, List<Employee> criticalCareList) throws FileNotFoundException {
-        ReadFromList(criticalCareFile, criticalCareList);
+        updateEmployeeList(criticalCareFile, criticalCareList);
     }
 
     private void createSurgeryList(String surgeryFile, List<Employee> surgeryList) throws FileNotFoundException {
-        ReadFromList(surgeryFile, surgeryList);
+        updateEmployeeList(surgeryFile, surgeryList);
     }
 
-    public void ReadFromList(String filePath, List<Employee> list) throws FileNotFoundException {
+    public void updateEmployeeList(String filePath, List<Employee> list) throws FileNotFoundException {
         s = new Scanner(new FileReader(filePath));
         try {
 

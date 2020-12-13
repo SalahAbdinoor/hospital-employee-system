@@ -181,29 +181,29 @@ public class EditWindow extends JFrame{
 
             // Depending on the chosen department for the employee, he/she will be added to said department list.
             switch (department) {
-                case ManageEmployees.cardiology -> {
+                case DAO.cardiology -> {
                     dao.cardiologyList.add(addedEmployee);
                     info = addedEmployee.writeInfo();
-                    addEmployeeToTextFile(ManageEmployees.cardiologyFile, info);
-                    new ManageEmployees(dao.cardiologyList,ManageEmployees.cardiologyFile, department, authority);
+                    addEmployeeToTextFile(DAO.cardiologyFile, info);
+                    new ManageEmployees(dao.cardiologyList,DAO.cardiologyFile, department, authority);
                 }
-                case ManageEmployees.anaesthetics -> {
+                case DAO.anaesthetics -> {
                     dao.anaestheticsList.add(addedEmployee);
                     info = addedEmployee.writeInfo();
-                    addEmployeeToTextFile(ManageEmployees.anaestheticsFile, info);
-                    new ManageEmployees(dao.anaestheticsList,ManageEmployees.anaestheticsFile, department,authority);
+                    addEmployeeToTextFile(DAO.anaestheticsFile, info);
+                    new ManageEmployees(dao.anaestheticsList,DAO.anaestheticsFile, department,authority);
                 }
-                case ManageEmployees.surgery -> {
+                case DAO.surgery -> {
                     dao.surgeryList.add(addedEmployee);
                     info = addedEmployee.writeInfo();
-                    addEmployeeToTextFile(ManageEmployees.surgeryFile, info);
-                    new ManageEmployees(dao.surgeryList,ManageEmployees.surgeryFile, department,authority);
+                    addEmployeeToTextFile(DAO.surgeryFile, info);
+                    new ManageEmployees(dao.surgeryList,DAO.surgeryFile, department,authority);
                 }
-                case ManageEmployees.criticalCare -> {
+                case DAO.criticalCare -> {
                     dao.criticalCareList.add(addedEmployee);
                     info = addedEmployee.writeInfo();
-                    addEmployeeToTextFile(ManageEmployees.criticalCareFile, info);
-                    new ManageEmployees(dao.criticalCareList,ManageEmployees.criticalCareFile, department,authority);
+                    addEmployeeToTextFile(DAO.criticalCareFile, info);
+                    new ManageEmployees(dao.criticalCareList,DAO.criticalCareFile, department,authority);
                 }
             }
 

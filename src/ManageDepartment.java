@@ -81,8 +81,6 @@ public class ManageDepartment extends JFrame implements ActionListener {
             case criticalCareCase -> {return dao.criticalCareList; }
         }
 
-
-
         return null;
 
     }
@@ -103,9 +101,13 @@ public class ManageDepartment extends JFrame implements ActionListener {
         if (e.getSource() == searchDepartment) {
 
             dispose();
-            ManageEmployees m = new ManageEmployees(findDepartmentList(), findFilePath(), listOfDepartments.getSelectedItem().toString(), "HR");
-
+            try {
+                ManageEmployees m = new ManageEmployees(findDepartmentList(), findFilePath(), listOfDepartments.getSelectedItem().toString(), "HR");
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
             }
+
+        }
         }
     }
 

@@ -1,8 +1,6 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.*;
@@ -15,23 +13,14 @@ public class ManageEmployees {
     private final JFrame frame = new JFrame("Employee Register");
     private JLabel label1;
     private JTextField textField;
-    private JButton addEmployeeButton, RemoveEmployeeButton, UpdateButton, backToMenu, printEmployeeCard;
+    private JButton addEmployeeButton, removeEmployeeButton, updateButton, backToMenu, printEmployeeCard;
     private JTable table;
     private final String[] columnNames = {"Firstname", "Surname", "Gender", "Birth date", "Tel.no", "Salary", "Department", "Role"};
     private JScrollPane scrollPane;
     private DefaultTableModel tabelmodel;
     private String[] departments = {"Kardiologi", "Kirurgi", "Akuten", "Anestesi"};
-    public static final String cardiologyFile = "Lists\\CardiologyEmployees";
-    public static final String surgeryFile = "Lists\\SurgeryEmployees";
-    public static final String criticalCareFile = "Lists\\CriticalCareEmployees";
-    public static final String anaestheticsFile = "Lists\\AnaestheticsEmployees";
-    FileWriter writer;
-    Scanner s;
-
-    public static final String cardiology = "Cardiology";
-    public static final String anaesthetics = "Anaesthetics";
-    public static final String surgery = "Surgery";
-    public static final String criticalCare = "Critical care";
+    private FileWriter writer;
+    private Scanner s;
     private String authority;
 
 
@@ -78,7 +67,7 @@ public class ManageEmployees {
         return null;
     }
 
-    public ManageEmployees(List<Employee> employeeList, String filePath, String department,String authority) {
+    public ManageEmployees(List<Employee> employeeList, String filePath, String department,String authority) throws FileNotFoundException {
         this.authority = authority;
 
         Object[][] convertedList = convertListTo2DObjectArray(employeeList);
@@ -108,11 +97,11 @@ public class ManageEmployees {
 
         frame.add(addEmployeeButton);
 
-        RemoveEmployeeButton = new JButton("Delete/Move");
-        RemoveEmployeeButton.setSize(100, 30);
-        RemoveEmployeeButton.setLocation(250, 370);
-        RemoveEmployeeButton.setFont(new Font(RemoveEmployeeButton.getFont().getName(), RemoveEmployeeButton.getFont().getStyle(), 10));
-        RemoveEmployeeButton.addActionListener(e -> {
+        removeEmployeeButton = new JButton("Delete/Move");
+        removeEmployeeButton.setSize(100, 30);
+        removeEmployeeButton.setLocation(250, 370);
+        removeEmployeeButton.setFont(new Font(removeEmployeeButton.getFont().getName(), removeEmployeeButton.getFont().getStyle(), 10));
+        removeEmployeeButton.addActionListener(e -> {
             try {
                 RemoveEmployee(employeeList,filePath,department);
             } catch (IOException fileNotFoundException) {
@@ -120,12 +109,12 @@ public class ManageEmployees {
             }
 
         });
-        frame.add(RemoveEmployeeButton);
+        frame.add(removeEmployeeButton);
 
-        UpdateButton = new JButton("Update info");
-        UpdateButton.setSize(100, 30);
-        UpdateButton.setLocation(450, 370);
-        UpdateButton.addActionListener(e -> {
+        updateButton = new JButton("Update info");
+        updateButton.setSize(100, 30);
+        updateButton.setLocation(450, 370);
+        updateButton.addActionListener(e -> {
             String name =tabelmodel.getValueAt(table.getSelectedRow(),0).toString()+tabelmodel.getValueAt(table.getSelectedRow(),1).toString();
             try {
                 updateEmployeeInfo(name, filePath, employeeList, department);
@@ -133,7 +122,7 @@ public class ManageEmployees {
                 fileNotFoundException.printStackTrace();
             }
         });
-        frame.add(UpdateButton);
+        frame.add(updateButton);
 
         backToMenu = new JButton("Back");
         backToMenu.setBounds(650, 470, 100 ,30);
@@ -283,19 +272,19 @@ public class ManageEmployees {
                 userChoice = JOptionPane.showOptionDialog(null, "To which department?", "Move employee", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, departments, departments[0]);
                 if (userChoice == 0){
                     tempDep = employeeInfo.replace(department, "Cardiology");
-                    SwapDepartment(tempDep, cardiologyFile);
+                    SwapDepartment(tempDep, DAO.cardiologyFile);
                 }
                 else if (userChoice == 1){
                     tempDep = employeeInfo.replace(department, "Surgery");
-                    SwapDepartment(tempDep, surgeryFile);
+                    SwapDepartment(tempDep, DAO.surgeryFile);
                 }
                 else if (userChoice == 2){
                     tempDep = employeeInfo.replace(department, "Critical care");
-                    SwapDepartment(tempDep, criticalCareFile );
+                    SwapDepartment(tempDep, DAO.criticalCareFile );
                 }
                 else if(userChoice == 3){
                     tempDep = employeeInfo.replace(department, "Anaesthetics");
-                    SwapDepartment(tempDep, anaestheticsFile);
+                    SwapDepartment(tempDep, DAO.anaestheticsFile);
                 }
                 else
                     System.out.println("Anställd borttagen");
@@ -413,17 +402,17 @@ public class ManageEmployees {
         DAO dao = new DAO();
 
         switch (department) {
-            case cardiology -> {
-                new ManageEmployees(dao.cardiologyList,cardiologyFile, department,authority);
+            case DAO.cardiology -> {
+                new ManageEmployees(dao.cardiologyList,DAO.cardiologyFile, department,authority);
             }
-            case anaesthetics -> {
-                new ManageEmployees(dao.anaestheticsList,anaestheticsFile, department,authority);
+            case DAO.anaesthetics -> {
+                new ManageEmployees(dao.anaestheticsList,DAO.anaestheticsFile, department,authority);
             }
-            case surgery -> {
-                new ManageEmployees(dao.surgeryList,surgeryFile, department,authority);
+            case DAO.surgery -> {
+                new ManageEmployees(dao.surgeryList,DAO.surgeryFile, department,authority);
             }
-            case criticalCare -> {
-                new ManageEmployees(dao.criticalCareList,criticalCareFile, department,authority);
+            case DAO.criticalCare -> {
+                new ManageEmployees(dao.criticalCareList,DAO.criticalCareFile, department,authority);
             }
         }
 
