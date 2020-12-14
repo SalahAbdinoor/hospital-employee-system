@@ -83,10 +83,4 @@ public class PassCard extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
-
-
-
-
-
-
 }

@@ -31,7 +31,6 @@ public class Login extends JFrame implements ActionListener {
         loginPanel.setLayout(null);
         loginPanel.setVisible(true);
 
-
         welcomeLabel.setBounds(100, 25, 250, 30);
         userLabel.setBounds(100, 90, 100, 30);
         passwordLabel.setBounds(100, 140, 100, 30);
